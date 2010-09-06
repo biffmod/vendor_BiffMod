@@ -1,0 +1,48 @@
+#!/system/bin/sh
+#
+# NOTICE:
+# Although I've written this file from scratch (well almost =o)
+# credits for this should go to Firerat and
+# flames should go to me =o)
+# NLJ
+# 20100822 - NLJ
+# - first version heavily based on Firerat work
+# 20100829 - NLJ
+# - auto-disable swap when CompCache is active
+# - added check for FroYo (would gladly check for CM6 but there is no prop
+#   for that
+
+PROP=0
+
+if [ -e /data/property/persist.service.compcache ]
+then
+    PROP=`getprop  persist.service.compcache`
+else
+    PROP=`getprop ro.compcache.default`
+    setprop persist.service.compcache $PROP
+fi # Above is taken from bin/handle_compcache
+    
+
+if [ `getprop ro.build.version.release` = "2.2" -a ! $PROP -eq 0 ]
+then
+    log -p i -t swap "CompCache is enabled. Swap will NOT be activated."
+    exit 0
+fi
+
+SWAPPINESS=20
+
+# Find swap partition
+SWAP=`fdisk -l /dev/block/mmcblk0 | awk '/^\// && $5 == 82 {print $1;exit;}'`
+
+
+if [ -n $SWAP ]
+then
+    swapon $SWAP 2>/dev/null
+    if [ $? -eq 0 ]
+    then
+        echo $SWAPPINESS > /proc/sys/vm/swappiness
+        log -p i -t swap "Swap activated on ${SWAP} with ${SWAPPINESS} swappiness"
+    else
+        log -p e -t swap "swapon ${SWAP} failed"
+    fi
+fi

@@ -1,0 +1,91 @@
+#!/system/bin/sh
+#
+# NOTICE:
+# Although I've written this file from scratch (well almost =o)
+# credits for this should go to Firerat and
+# flames should go to me =o)
+# NLJ
+# 20100822 
+# - first version heavily based on Firerat work
+
+BB="logwrapper busybox"
+FDISK="busybox fdisk"
+ExitCode=0
+
+if [ -z ${SD_EXT_DIRECTORY} ]
+then
+    SD_EXT_DIRECTORY=/sd-ext
+fi
+
+if [ ! -d ${SD_EXT_DIRECTORY} ] 
+then
+    $BB mount -o remount,rw /
+    install install -m 774 -o 1000 -g 1000 -d ${SD_EXT_DIRECTORY}
+    $BB mount -o remount,ro /
+    log -p i -t mountsd "Created ${SD_EXT_DIRECTORY} dir"
+fi
+
+# IConrad01's fix for CM6
+# http://forum.cyanogenmod.com/topic/2636-froyo-a2sdext/page__view__findpost__p__26124
+#
+
+MMC=/dev/block/mmcblk0
+if [ ! -b "$MMC" ];
+then
+        mknod ${MMC} b 179 0
+        chmod 600 ${MMC}
+        for i in  1 2 3;do
+                mknod ${MMC}p${i} b 179 $i
+                chmod 600 ${MMC}p${i}
+        done
+fi
+
+# wait for the device to settle
+COUNT=6;
+until [ -b "$MMC" ] || [ $COUNT -lt 1 ];
+do
+    sleep 1;
+    COUNT=$((COUNT-1));
+done;
+
+# Find first Linux partition
+
+if [ ! -b "$MMC" ]
+then
+    log -p e -t mountsd "Can't detect SD Card"
+    exit 1
+fi
+
+PARTITION=`$FDISK -l $MMC | awk '/^\// && $5 == 83 {print $1;exit;}'`
+if [ ! -b ${PARTITION} ]
+then
+    log -p e -t mountsd "Discovered Linux partition (${PARTITION}) not detected"
+    exit 1
+fi
+
+if [ -x /system/bin/e2fsck ]
+then
+    log -p i -t mountsd "Checking filesystem on ${PARTITION}"
+    e2fsck -y ${PARTITION}
+    ExitCode=$?
+fi
+setprop cm.e2fsck.errors $ExitCode
+if [ ! ${ExitCode} -eq 0 ]
+then
+    log -p e -t mountsd "Filesystem check failed on ${PARTITION}. Not mounting"
+    exit 1
+fi
+
+$BB mount -o noatime,nodiratime -t auto ${PARTITION} ${SD_EXT_DIRECTORY}
+
+if [ $? -eq 0 ]
+then
+    $BB chown 1000.1000 ${SD_EXT_DIRECTORY}
+    $BB chmod 771 ${SD_EXT_DIRECTORY}
+    log -p i -t mountsd "${PARTITION} successfully mounted on ${SD_EXT_DIRECTORY}"
+else
+    log -p e -t mountsd "Failed to mount ${PARTITION} on ${SD_EXT_DIRECTORY}"
+    exit 1
+fi
+
+exit 0
