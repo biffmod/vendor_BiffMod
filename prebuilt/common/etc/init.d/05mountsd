@@ -66,13 +66,13 @@ fi
 if [ -x /system/bin/e2fsck ]
 then
     log -p i -t mountsd "Checking filesystem on ${PARTITION}"
-    e2fsck -y ${PARTITION}
+    e2fsck -pv ${PARTITION}
     ExitCode=$?
 fi
 setprop cm.e2fsck.errors $ExitCode
 if [ ! ${ExitCode} -eq 0 ]
 then
-    log -p e -t mountsd "Filesystem check failed on ${PARTITION}. Not mounting"
+    log -p e -t mountsd "Unable to repair filesystem on ${PARTITION}. Not mounting"
     exit 1
 fi
 
