@@ -4,6 +4,9 @@
 # Decides whether or not Compcache is enabled
 #
 
+$MEMTOTAL=$( awk '{ if ($1 eq "MemTotal:") print $2 ;exit }' </proc/meminfo )
+$DEFPCENT=25
+
 if [ -e /data/property/persist.service.compcache ];
 then
   PROP=`getprop persist.service.compcache`
@@ -14,10 +17,16 @@ fi
 
 if [ $PROP == 1 ]
 then
-  `dirname $0`/compcache start
+  setprop persist.service.compcache $DEFPCENT
+  PROP=$DEFPCENT
+fi
+
+if [ $PROP != 0 ]
+then
+  SIZE=$(($MEMTOTAL*$PROP/100))
+  `dirname $0`/compcache start $SIZE
 else
   `dirname $0`/compcache stop
 fi
 
 exit 0
-
