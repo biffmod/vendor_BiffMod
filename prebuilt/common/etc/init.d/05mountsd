@@ -70,7 +70,11 @@ then
     ExitCode=$?
 fi
 setprop cm.e2fsck.errors $ExitCode
-if [ ! ${ExitCode} -eq 0 ]
+
+# e2fsck actually can return 1 on success too (if errors were recovered)
+# Found by Ohsaka 
+# http://forum.xda-developers.com/showpost.php?p=8166027&postcount=562
+if [ ${ExitCode} -gt 1 ]
 then
     log -p e -t mountsd "Unable to repair filesystem on ${PARTITION}. Not mounting"
     exit 1
