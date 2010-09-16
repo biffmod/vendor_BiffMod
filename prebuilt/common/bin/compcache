@@ -14,7 +14,7 @@ case "$1" in
       modprobe $MODULE
       if [ -n $2 ]
       then
-         rzscontrol $DEV -disksize_kb=$2 --init
+         rzscontrol $DEV --disksize_kb=$2 --init
       else
          rzscontrol $DEV --init
       fi
