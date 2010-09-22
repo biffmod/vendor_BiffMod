@@ -1,11 +1,11 @@
 # Inherit AOSP device configuration for dream_sapphire.
 $(call inherit-product, device/htc/dream_sapphire/full_dream_sapphire.mk)
 
-# Inherit some common cyanogenmod & nlj stuff
-$(call inherit-product, vendor/nlj/products/common.mk)
+# Inherit some common cyanogenmod & biffmod stuff
+$(call inherit-product, vendor/biffmod/products/common.mk)
 
 # Include GSM-only stuff
-$(call inherit-product, vendor/nlj/products/gsm.mk)
+$(call inherit-product, vendor/biffmod/products/gsm.mk)
 
 #
 # Setup device specific product configuration.
@@ -22,7 +22,7 @@ PRODUCT_SPECIFIC_DEFINES += TARGET_PRELINKER_MAP=$(TOP)/vendor/cyanogen/prelink-
 # Build kernel
 PRODUCT_SPECIFIC_DEFINES += TARGET_PREBUILT_KERNEL=
 PRODUCT_SPECIFIC_DEFINES += TARGET_KERNEL_DIR=kernel-msm
-PRODUCT_SPECIFIC_DEFINES += TARGET_KERNEL_CONFIG=nlj_msm_defconfig
+PRODUCT_SPECIFIC_DEFINES += TARGET_KERNEL_CONFIG=biffmod_msm_defconfig
 
 # Extra DS overlay
 PRODUCT_PACKAGE_OVERLAYS += vendor/biffmod/overlay/dream_sapphire
@@ -50,7 +50,7 @@ PRODUCT_COPY_FILES +=  \
     vendor/cyanogen/prebuilt/dream_sapphire/etc/AudioPara_sapphire.csv:system/etc/AudioPara_sapphire.csv \
     vendor/cyanogen/prebuilt/dream_sapphire/etc/init.d/02audio_profile:system/etc/init.d/02audio_profile \
     vendor/biffmod/prebuilt/common/bin/ApkManager.sh:system/bin/ApkManager.sh \
-    vendor/biffmod/prebuilt/common/etc/init.d/05mountsd:system/etc/init.d/05mountsd \
+    vendor/cyanogen/prebuilt/common/etc/init.d/05mountsd:system/etc/init.d/05mountsd \
     vendor/biffmod/prebuilt/common/etc/init.d/06bindcache:system/etc/init.d/06bindcache \
     vendor/biffmod/prebuilt/common/etc/init.d/08swap:system/etc/init.d/08swap \
     vendor/biffmod/prebuilt/common/etc/init.d/10apps2sd:system/etc/init.d/10apps2sd

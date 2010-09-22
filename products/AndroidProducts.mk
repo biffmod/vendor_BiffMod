@@ -1,2 +1,2 @@
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/nlj_dream_sapphire.mk
+    $(LOCAL_DIR)/biffmod_dream_sapphire.mk
