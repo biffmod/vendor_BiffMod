@@ -19,7 +19,7 @@
     <!-- LAB -->
     <favorite
         launcher:packageName="com.android.contacts"
-        launcher:className="com.android.contacts.DialtactsContactsEntryActivity"
+        launcher:className="com.android.contacts.DialtactsActivity"
         launcher:screen="-1"
         launcher:x="-1"
         launcher:y="-1"
@@ -27,14 +27,23 @@
 
     <!-- RAB -->
     <favorite
-        launcher:packageName="com.android.mms"
-        launcher:className="com.android.mms.ui.ConversationList"
+        launcher:packageName="com.android.browser"
+        launcher:className="com.android.browser.BrowserActivity"
         launcher:screen="-1"
         launcher:x="-1"
         launcher:y="-1"
         launcher:container="-400" />
 
     <!--  Left screen [1] -->
+    <appwidget
+        launcher:packageName="com.google.android.apps.genie.geniewidget"
+        launcher:className="com.google.android.apps.genie.geniewidget.miniwidget.MiniWidgetProvider"
+        launcher:screen="1"
+        launcher:x="0"
+        launcher:y="0"
+        launcher:spanX="4"
+        launcher:spanY="1" />
+
     <favorite
         launcher:packageName="com.android.camera"
         launcher:className="com.android.camera.Camera"
@@ -50,28 +59,26 @@
         launcher:y="3" />
 
     <!--  Middle screen [2] -->
-    <appwidget
-        launcher:packageName="com.android.settings"
-        launcher:className="com.android.settings.widget.SettingsAppWidgetProvider"
-        launcher:screen="2"
-        launcher:x="0"
-        launcher:y="0"
-        launcher:spanX="4"
-        launcher:spanY="1" />
-
     <search
         launcher:screen="2"
         launcher:x="0"
-        launcher:y="1" />
+        launcher:y="0" />
 
     <appwidget
         launcher:packageName="com.android.protips"
         launcher:className="com.android.protips.ProtipWidget"
         launcher:screen="2"
         launcher:x="0"
-        launcher:y="2"
+        launcher:y="1"
         launcher:spanX="4"
         launcher:spanY="1" />
+
+    <favorite
+        launcher:packageName="com.android.contacts"
+        launcher:className="com.android.contacts.DialtactsContactsEntryActivity"
+        launcher:screen="2"
+        launcher:x="1"
+        launcher:y="3" />
 
     <favorite
         launcher:packageName="com.google.android.apps.maps"
@@ -81,12 +88,41 @@
         launcher:y="3" />
 
     <favorite
+        launcher:packageName="com.android.mms"
+        launcher:className="com.android.mms.ui.ConversationList"
+        launcher:screen="2"
+        launcher:x="0"
+        launcher:y="3" />
+
+    <favorite
         launcher:packageName="com.android.vending"
         launcher:className="com.android.vending.AssetBrowserActivity"
         launcher:screen="2"
-        launcher:x="1"
+        launcher:x="2"
         launcher:y="3" />
 
     <!--  Right screen [3] -->
 
+    <appwidget
+        launcher:packageName="com.android.settings"
+        launcher:className="com.android.settings.widget.SettingsAppWidgetProvider"
+        launcher:screen="3"
+        launcher:x="0"
+        launcher:y="0"
+        launcher:spanX="4"
+        launcher:spanY="1" />
+
+    <favorite
+        launcher:packageName="com.google.android.gm"
+        launcher:className="com.google.android.gm.ConversationListActivityGmail"
+        launcher:screen="3"
+        launcher:x="1"
+        launcher:y="3" />
+
+    <favorite
+        launcher:packageName="com.google.android.talk"
+        launcher:className="com.google.android.talk.SigningInActivity"
+        launcher:screen="3"
+        launcher:x="2"
+        launcher:y="3" />
 </favorites>
