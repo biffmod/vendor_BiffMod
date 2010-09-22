@@ -1,4 +1,4 @@
-# Generic Cyanogenmod + NLJ product
+# Generic Cyanogenmod + BiffMod product
 PRODUCT_NAME := biffmod
 PRODUCT_BRAND := cyanogen
 PRODUCT_DEVICE := generic
@@ -35,7 +35,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PACKAGES += \
     CMParts \
     CMPartsHelper \
-    CMWallpapers \
+    BiffMod \
     Superuser
 
 # DSPManager
@@ -45,7 +45,7 @@ PRODUCT_COPY_FILES += \
     vendor/cyanogen/CHANGELOG.mkdn:system/etc/CHANGELOG-CM.txt
 
 # Common CM overlay
-PRODUCT_PACKAGE_OVERLAYS += vendor/nlj/overlay/common
+PRODUCT_PACKAGE_OVERLAYS += vendor/biffmod/overlay/common
 
 # Bring in some audio files
 include frameworks/base/data/sounds/AudioPackage4.mk
