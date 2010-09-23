@@ -45,7 +45,7 @@ WITH_DS_HTCACOUSTIC_HACK := true
 # Copy DS specific prebuilt files
 #
 PRODUCT_COPY_FILES +=  \
-    vendor/cyanogen/prebuilt/mdpi/media/bootanimation.zip:system/media/bootanimation.zip \
+    vendor/biffmod/prebuilt/mdpi/media/bootanimation.zip:system/media/bootanimation.zip \
     vendor/cyanogen/prebuilt/dream_sapphire/etc/AudioPara_dream.csv:system/etc/AudioPara_dream.csv \
     vendor/cyanogen/prebuilt/dream_sapphire/etc/AudioPara_sapphire.csv:system/etc/AudioPara_sapphire.csv \
     vendor/cyanogen/prebuilt/dream_sapphire/etc/init.d/02audio_profile:system/etc/init.d/02audio_profile \
@@ -56,7 +56,7 @@ PRODUCT_COPY_FILES +=  \
     vendor/biffmod/prebuilt/common/etc/init.d/10apps2sd:system/etc/init.d/10apps2sd
 
 
-PRODUCT_PACKAGES += Gallery Launcher2
+PRODUCT_PACKAGES += Gallery Launcher2 BiffMod
 
 PACKAGES.Gallery.OVERRIDES := Gallery3D
 
