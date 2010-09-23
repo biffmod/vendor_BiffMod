@@ -3,6 +3,8 @@
 # Squish a CM otapackage for distribution
 # cyanogen
 #
+# BiffMod WANT_SQUASFS too
+#
 
 OUT_TARGET_HOST=`uname -a | grep Darwin`
 if [ -z "$OUT_TARGET_HOST" ]
@@ -32,7 +34,7 @@ DELETE_BINS="applypatch applypatch_static check_prereq recovery updater"
 
 # Some products want a squashfs for xbin for space
 case "$TARGET_PRODUCT" in
-	cyanogen_dream_sapphire) WANT_SQUASHFS=1 ;;
+	biffmod_dream_sapphire) WANT_SQUASHFS=1 ;;
 	*) WANT_SQUASHFS=0 ;;
 esac
 
