@@ -1,5 +1,5 @@
-# Generic Cyanogenmod + NLJ product
-PRODUCT_NAME := nlj
+# Generic Cyanogenmod + BiffMod product
+PRODUCT_NAME := biffmod
 PRODUCT_BRAND := cyanogen
 PRODUCT_DEVICE := generic
 
@@ -9,7 +9,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.config.ringtone=DonMessWivIt.ogg
 
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.rommanager.developerid=cyanogenmod_nlj
+    ro.rommanager.developerid=cyanogenmod_biffmod
 
 PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=0
 
@@ -35,16 +35,17 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PACKAGES += \
     CMParts \
     CMPartsHelper \
-    CMWallpapers \
-    DSPManager \
+    BiffMod \
     Superuser
+
+# DSPManager
 
 # Copy over the changelog to the device
 PRODUCT_COPY_FILES += \
     vendor/cyanogen/CHANGELOG.mkdn:system/etc/CHANGELOG-CM.txt
 
 # Common CM overlay
-PRODUCT_PACKAGE_OVERLAYS += vendor/nlj/overlay/common
+PRODUCT_PACKAGE_OVERLAYS += vendor/biffmod/overlay/common
 
 # Bring in some audio files
 include frameworks/base/data/sounds/AudioPackage4.mk
@@ -62,8 +63,8 @@ PRODUCT_COPY_FILES += \
     vendor/cyanogen/prebuilt/common/etc/init.d/03firstboot:system/etc/init.d/03firstboot \
     vendor/cyanogen/prebuilt/common/etc/init.d/04modules:system/etc/init.d/04modules \
     vendor/cyanogen/prebuilt/common/etc/init.d/20userinit:system/etc/init.d/20userinit \
-    vendor/nlj/prebuilt/common/bin/handle_compcache:system/bin/handle_compcache \
-    vendor/nlj/prebuilt/common/bin/compcache:system/bin/compcache \
+    vendor/biffmod/prebuilt/common/bin/handle_compcache:system/bin/handle_compcache \
+    vendor/biffmod/prebuilt/common/bin/compcache:system/bin/compcache \
     vendor/cyanogen/prebuilt/common/bin/fix_permissions:system/bin/fix_permissions \
     vendor/cyanogen/prebuilt/common/bin/sysinit:system/bin/sysinit \
     vendor/cyanogen/prebuilt/common/xbin/htop:system/xbin/htop \
