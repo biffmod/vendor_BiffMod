@@ -1,13 +1,13 @@
 # Generic Cyanogenmod + BiffMod product
 PRODUCT_NAME := biffmod
-PRODUCT_BRAND := cyanogen
+PRODUCT_BRAND := biffmod
 PRODUCT_DEVICE := generic
 
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.config.ringtone=DonMessWivIt.ogg
 
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.rommanager.developerid=cyanogenmod_biffmod
+    ro.rommanager.developerid=biffmod
 
 PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=0
 
