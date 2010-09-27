@@ -17,7 +17,7 @@ then
     SWAPPROP=`getprop  persist.sys.swap`
 else
     SWAPPROP=`getprop ro.swap.default`
-    setprop persist.service.compcache $SWAPPROP
+    setprop persist.sys.swap $SWAPPROP
 fi # Idea taken from bin/handle_compcache
 
 if [ -e /data/property/persist.service.compcache ]
