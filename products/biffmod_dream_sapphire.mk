@@ -35,8 +35,14 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.swap.default=1
 
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.modversion=CyanogenMod-6-$(shell date +%m%d%Y)-BiffMod
+# Set ModVersion
+ifdef BIFFMOD_RELEASE
+    PRODUCT_PROPERTY_OVERRIDES += \
+       ro.modversion=BiffMod-V2.1
+else
+    PRODUCT_PROPERTY_OVERRIDES += \
+       ro.modversion=BiffMod-$(shell date +%m%d%Y)
+endif
 
 # Use the audio profile hack
 WITH_DS_HTCACOUSTIC_HACK := true
