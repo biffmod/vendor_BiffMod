@@ -22,7 +22,7 @@ PRODUCT_SPECIFIC_DEFINES += TARGET_PRELINKER_MAP=$(TOP)/vendor/biffmod/prelink-l
 # Build kernel
 PRODUCT_SPECIFIC_DEFINES += TARGET_PREBUILT_KERNEL=
 PRODUCT_SPECIFIC_DEFINES += TARGET_KERNEL_DIR=kernel-msm
-PRODUCT_SPECIFIC_DEFINES += TARGET_KERNEL_CONFIG=biffmod_msm_defconfig
+PRODUCT_SPECIFIC_DEFINES += TARGET_KERNEL_CONFIG=$(TOP)/vendor/biffmod/biffmod_msm_defconfig
 
 # Extra DS overlay
 PRODUCT_PACKAGE_OVERLAYS += vendor/biffmod/overlay/dream_sapphire
