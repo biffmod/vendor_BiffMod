@@ -1,0 +1,6 @@
+#!/system/bin/sh
+
+log -p i -t st "++Setting governor and disabling some scheduler features++"
+echo "ondemand" >  /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
+echo "5000000" > /sys/devices/system/cpu/cpu0/cpufreq/ondemand/sampling_rate
+echo "50" > /sys/devices/system/cpu/cpu0/cpufreq/ondemand/up_threshold

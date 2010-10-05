@@ -1,0 +1,26 @@
+#!/system/bin/sh
+if [ "`mount |grep -q dalvik-cache;echo $?`" = "1" ];
+then
+	if [ "`egrep -q "sd-ext|/system/sd" /proc/mounts;echo $?`" = "0" ];
+	then
+		SD_EXT_DIRECTORY=`egrep "sd-ext|/system/sd" /proc/mounts|awk '{ print $2 }'`
+	else
+		echo "sdext not mounted.. nothing to bind with.. exiting"
+		exit 
+	fi
+
+	if [ -e $SD_EXT_DIRECTORY/dalvik-cache ] && [ ! -d $SD_EXT_DIRECTORY/dalvik-cache ];
+	then
+		rm $SD_EXT_DIRECTORY/dalvik-cache
+	fi
+
+	if [ ! -d $SD_EXT_DIRECTORY/dalvik-cache ];
+	then
+		install -m 771 -o 1000 -g 1000 -d $SD_EXT_DIRECTORY/dalvik-cache
+	fi
+
+	rm /data/dalvik-cache/*
+	busybox mount -o bind $SD_EXT_DIRECTORY/dalvik-cache /data/dalvik-cache
+	else
+	exit 0
+fi
