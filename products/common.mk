@@ -62,7 +62,6 @@ PRODUCT_COPY_FILES += \
     vendor/biffmod/prebuilt/common/etc/init.d/01sysctl:system/etc/init.d/01sysctl \
     vendor/biffmod/prebuilt/common/etc/init.d/03firstboot:system/etc/init.d/03firstboot \
     vendor/biffmod/prebuilt/common/etc/init.d/04modules:system/etc/init.d/04modules \
-    vendor/biffmod/prebuilt/common/etc/init.d/20userinit:system/etc/init.d/20userinit \
     vendor/biffmod/prebuilt/common/bin/handle_compcache:system/bin/handle_compcache \
     vendor/biffmod/prebuilt/common/bin/compcache:system/bin/compcache \
     vendor/biffmod/prebuilt/common/bin/fix_permissions:system/bin/fix_permissions \
