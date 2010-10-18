@@ -52,6 +52,7 @@ include frameworks/base/data/sounds/AudioPackage4.mk
 
 PRODUCT_COPY_FILES += \
     vendor/biffmod/prebuilt/common/bin/backuptool.sh:system/bin/backuptool.sh \
+    vendor/biffmod/prebuilt/common/bin/verify_cache_partition_size.sh:system/bin/verify_cache_partition_size.sh \
     vendor/biffmod/prebuilt/common/etc/resolv.conf:system/etc/resolv.conf \
     vendor/biffmod/prebuilt/common/etc/sysctl.conf:system/etc/sysctl.conf \
     vendor/biffmod/prebuilt/common/etc/terminfo/l/linux:system/etc/terminfo/l/linux \
@@ -62,6 +63,7 @@ PRODUCT_COPY_FILES += \
     vendor/biffmod/prebuilt/common/etc/init.d/01sysctl:system/etc/init.d/01sysctl \
     vendor/biffmod/prebuilt/common/etc/init.d/03firstboot:system/etc/init.d/03firstboot \
     vendor/biffmod/prebuilt/common/etc/init.d/04modules:system/etc/init.d/04modules \
+    vendor/biffmod/prebuilt/common/etc/init.d/20userinit:system/etc/init.d/20userinit \
     vendor/biffmod/prebuilt/common/bin/handle_compcache:system/bin/handle_compcache \
     vendor/biffmod/prebuilt/common/bin/compcache:system/bin/compcache \
     vendor/biffmod/prebuilt/common/bin/fix_permissions:system/bin/fix_permissions \
@@ -112,7 +114,6 @@ ifdef CYANOGEN_WITH_GOOGLE
         vendor/biffmod/proprietary/com.google.android.maps.xml:./system/etc/permissions/com.google.android.maps.xml \
         vendor/biffmod/proprietary/features.xml:./system/etc/permissions/features.xml \
         vendor/biffmod/proprietary/com.google.android.maps.jar:./system/framework/com.google.android.maps.jar \
-        vendor/biffmod/proprietary/libinterstitial.so:./system/lib/libinterstitial.so \
         vendor/biffmod/proprietary/libspeech.so:./system/lib/libspeech.so
 else
     PRODUCT_PACKAGES += \
