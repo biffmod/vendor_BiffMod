@@ -1,0 +1,9 @@
+#
+# buildspec.mk template 
+#
+
+# uncoment below to pick Ezterry's kernel tree for building
+#EZTERRYS:=true
+
+# uncomment below to build Release version
+#BIFFMOD_RELEASE:=true
