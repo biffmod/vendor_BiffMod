@@ -1,0 +1,75 @@
+####!/system/bin/sh
+#
+# Remove Launcher script
+#  use this script to remove Launcher.apk from
+#  /system/app/ dir -- need adb remount
+ 
+ 
+# Usage check
+if [ $# -ne 1 ]; then
+ echo "*** Usage error: remove_launcher [stock | nexus ]"
+ exit 1
+fi
+ 
+# Set global vars based on args passed to the script
+if [ $1 = 'stock' ]; then
+  apk=/system/app/Launcher2.apk
+  pref=/data/data/com.android.launcher/
+elif [ $1 = 'nexus' ]; then
+  apk=/system/app/NexusLauncher.apk
+  pref=/data/data/com.android.nexuslauncher/
+else
+ echo "*** Usage error: remove_launcher [stock | nexus ]"
+ exit 1
+fi  
+ 
+# Check if /system partition is mounted ro
+mount | grep '/system type' | grep -q '(ro';
+state=$?;
+echo "state=${state}";
+if [ "$state" = "0" ]; then
+  # Remont the /system partition rw
+  mount -o rw,remount /dev/block/mtdblck3 /system;
+  if [ $? -ne 0 ]; then
+    echo "*** ERROR cannot remount /system partition rw"
+    echo "*** pls report to dev"
+    exit 1
+  else
+    echo "/system remounted as readable"
+  fi  
+fi
+ 
+#Now we can rm launcher files
+if [ -e $apk ]; then
+  echo "+++ Removing $apk file"
+  rm -f $apk > /dev/null
+  if [ $? -ne 0 ]; then
+    # remount /system partition in ro mode
+    mount -o ro,remount /dev/block/mtdblck3 /system
+    echo "*** ERROR cannot delete $apk file"
+    echo "*** pls report to dev"
+    exit 1
+  else
+    echo "$apk removed successfully"
+  fi
+ 
+  if [ -d $pref ]; then
+    echo "+++ Removing $pref preference dir"
+    rm -fr $pref > /dev/null
+    if [ $? -ne 0 ]; then
+      # remount /system partition in ro mode
+      mount -o ro,remount /dev/block/mtdblck3 /system
+      echo "*** ERROR cannot delete $pref dir"
+      echo "*** pls report to dev"
+      exit 1
+    else 
+      echo "$pref directory removed successfully"
+    fi
+  fi
+fi
+ 
+# remount /system partition in ro mode
+mount -o ro,remount /dev/block/mtdblck3 /system
+echo "/system remounted as readonly"
+echo "+++ DONE"
+exit 0
