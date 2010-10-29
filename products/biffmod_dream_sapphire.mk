@@ -63,7 +63,6 @@ PRODUCT_COPY_FILES +=  \
     vendor/biffmod/prebuilt/dream_sapphire/etc/init.d/02audio_profile:system/etc/init.d/02audio_profile \
     vendor/biffmod/prebuilt/common/bin/ApkManager.sh:system/bin/ApkManager.sh \
     vendor/biffmod/prebuilt/common/etc/init.d/05mountsd:system/etc/init.d/05mountsd \
-    vendor/biffmod/prebuilt/common/etc/init.d/06bindcache:system/etc/init.d/06bindcache \
     vendor/biffmod/prebuilt/common/etc/init.d/08swap:system/etc/init.d/08swap \
     vendor/biffmod/prebuilt/common/etc/init.d/10apps2sd:system/etc/init.d/10apps2sd
 
