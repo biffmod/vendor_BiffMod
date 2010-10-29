@@ -62,7 +62,7 @@ PRODUCT_COPY_FILES +=  \
     vendor/biffmod/prebuilt/dream_sapphire/etc/AudioPara_sapphire.csv:system/etc/AudioPara_sapphire.csv \
     vendor/biffmod/prebuilt/dream_sapphire/etc/init.d/02audio_profile:system/etc/init.d/02audio_profile \
     vendor/biffmod/prebuilt/common/bin/ApkManager.sh:system/bin/ApkManager.sh \
-    vender/biffmod/prebuilt/common/bin/remove_launcher:system/bin/remove_launcher \
+    vendor/biffmod/prebuilt/common/bin/remove_launcher:system/bin/remove_launcher \
     vendor/biffmod/prebuilt/common/etc/init.d/05mountsd:system/etc/init.d/05mountsd \
     vendor/biffmod/prebuilt/common/etc/init.d/08swap:system/etc/init.d/08swap \
     vendor/biffmod/prebuilt/common/etc/init.d/10apps2sd:system/etc/init.d/10apps2sd
