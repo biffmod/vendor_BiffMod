@@ -40,7 +40,7 @@ PRODUCT_PACKAGES += \
 
 # Add in CMParts dex2sd init.d script
 PRODUCT_COPY_FILES += \
-	packages/apps/CMParts/init_d.sh:system/etc/init.d/09dex2sd
+	packages/apps/CMParts/init_d.sh:system/etc/init.d/11dex2sd
 
 # Copy over the changelog to the device
 #PRODUCT_COPY_FILES += \
