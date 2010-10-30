@@ -38,6 +38,10 @@ PRODUCT_PACKAGES += \
 
 # DSPManager
 
+# Add in CMParts dex2sd init.d script
+PRODUCT_COPY_FILES += \
+	packages/apps/CMParts/init_d.sh:system/etc/init.d/09dex2sd
+
 # Copy over the changelog to the device
 #PRODUCT_COPY_FILES += \
 #    vendor/biffmod/CHANGELOG.mkdn:system/etc/CHANGELOG-CM.txt
