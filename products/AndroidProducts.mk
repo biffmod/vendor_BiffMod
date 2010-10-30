@@ -4,4 +4,5 @@ PRODUCT_MAKEFILES := \
 biffmod-ota: otapackage
 	echo "SquishIt :)"
 	./vendor/biffmod/tools/squisher
+	./vendor/biffmod/tools/add-wifitether
 

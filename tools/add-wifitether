@@ -1,0 +1,54 @@
+#!/bin/sh
+# add android-wireless-tether for root users
+#
+# this is intended to run just after squisher by make biffmod-ota 
+
+OUT_TARGET_HOST=`uname -a | grep Darwin`
+if [ -z "$OUT_TARGET_HOST" ]
+then
+    OUT_TARGET_HOST=linux-x86
+    MD5=md5sum
+else
+    OUT_TARGET_HOST=darwin-x86
+    MD5=md5
+fi
+
+
+if [ -z "$OUT" -o ! -d "$OUT" ]; then
+    echo "requires a full build enviroment (\$OUT not set)"
+fi
+if [ -z "$OUTFILE" -o ! -e "$OUTFILE" ]; then
+    echo "squisher output missing; please run squisher before this app"
+fi
+
+$DEST_DIRNAME=`dirname "$OUTFILE"`
+mkdir -p "$DEST_DIRNAME/wifi-tether-tmp/system/app"
+cp vendor/biffmod/wireless_tether_2_0_2.apk "$OUT/wifi-tether/system/app"
+(
+    cd "`dirname $OUTFILE`"
+    mv "`basenaem $OUTFILE`" "wifi-tether-tmp/"
+    cd "wifi-tether-tmp"
+    zip -m "`basenaem $OUTFILE`" system/app/wireless_tether_2_0_2.apk
+)
+
+echo apk added, time to resign
+SECURITYDIR=$ANDROID_BUILD_TOP/build/target/product/security
+java -Xmx512m \
+    -jar $ANDROID_BUILD_TOP/out/host/$OUT_TARGET_HOST/framework/signapk.jar \
+    -w $SECURITYDIR/testkey.x509.pem $SECURITYDIR/testkey.pk8 \
+       "$DEST_DIRNAME/`basenaem $OUTFILE`" $OUTFILE
+
+echo cleanup
+rm -rf "$DEST_DIRNAME/wifi-tether-tmp"
+
+echo new_checksum
+(
+img=`basename $OUTFILE`
+cd `dirname $OUTFILE`
+$MD5 $img >$img.md5sum
+echo
+echo "Package complete: $OUTFILE"
+cat $img.md5sum
+echo
+)
+
