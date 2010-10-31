@@ -43,8 +43,13 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # Set ModVersion
 ifdef BIFFMOD_RELEASE
+ifdef BIFFMOD_RC_NUM
+    PRODUCT_PROPERTY_OVERRIDES += \
+       ro.modversion=BiffMod-V2.1-rc$(BIFFMOD_RC_NUM)
+else
     PRODUCT_PROPERTY_OVERRIDES += \
        ro.modversion=BiffMod-V2.1
+endif
 else
     PRODUCT_PROPERTY_OVERRIDES += \
        ro.modversion=BiffMod-$(shell date +%m%d%Y)
