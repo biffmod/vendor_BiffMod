@@ -38,9 +38,9 @@ PRODUCT_PACKAGES += \
 
 # DSPManager
 
-# Add in CMParts dex2sd init.d script
+# Add in CMParts dex2sd init.d script (as 11bind-dc)
 PRODUCT_COPY_FILES += \
-	packages/apps/CMParts/init_d.sh:system/etc/init.d/11dex2sd
+	packages/apps/CMParts/init_d.sh:system/etc/init.d/11bind-dc
 
 # Copy over the changelog to the device
 #PRODUCT_COPY_FILES += \
