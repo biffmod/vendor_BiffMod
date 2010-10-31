@@ -13,22 +13,34 @@ else
     MD5=md5
 fi
 
+# Determine what to name the new signed package
+if [ -z "$CYANOGEN_NIGHTLY" ]; then
+    MODVERSION=`sed -n -e'/ro\.modversion/s/^.*CyanogenMod-6-//p' $OUT/system/build.prop`
+    : ${MODVERSION:=nightly-BiffMod}
+    OUTFILE=$OUT/update-$MODVERSION-signed.zip
+else
+    OUTFILE=$OUT/update-squished.zip
+fi
+
+echo $OUTFILE
 
 if [ -z "$OUT" -o ! -d "$OUT" ]; then
     echo "requires a full build enviroment (\$OUT not set)"
+    exit -1
 fi
 if [ -z "$OUTFILE" -o ! -e "$OUTFILE" ]; then
     echo "squisher output missing; please run squisher before this app"
+    exit -1
 fi
 
-$DEST_DIRNAME=`dirname "$OUTFILE"`
+DEST_DIRNAME=`dirname "$OUTFILE"`
 mkdir -p "$DEST_DIRNAME/wifi-tether-tmp/system/app"
-cp vendor/biffmod/wireless_tether_2_0_2.apk "$OUT/wifi-tether/system/app"
+cp vendor/biffmod/wireless_tether_2_0_2.apk "$DEST_DIRNAME/wifi-tether-tmp/system/app/wireless_tether_2_0_2.apk"
 (
     cd "`dirname $OUTFILE`"
-    mv "`basenaem $OUTFILE`" "wifi-tether-tmp/"
+    mv "`basename $OUTFILE`" "wifi-tether-tmp/"
     cd "wifi-tether-tmp"
-    zip -m "`basenaem $OUTFILE`" system/app/wireless_tether_2_0_2.apk
+    zip -m "`basename $OUTFILE`" system/app/wireless_tether_2_0_2.apk
 )
 
 echo apk added, time to resign
@@ -36,7 +48,7 @@ SECURITYDIR=$ANDROID_BUILD_TOP/build/target/product/security
 java -Xmx512m \
     -jar $ANDROID_BUILD_TOP/out/host/$OUT_TARGET_HOST/framework/signapk.jar \
     -w $SECURITYDIR/testkey.x509.pem $SECURITYDIR/testkey.pk8 \
-       "$DEST_DIRNAME/`basenaem $OUTFILE`" $OUTFILE
+       "$DEST_DIRNAME/wifi-tether-tmp/`basename $OUTFILE`" $OUTFILE
 
 echo cleanup
 rm -rf "$DEST_DIRNAME/wifi-tether-tmp"
