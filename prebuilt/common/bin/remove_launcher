@@ -7,7 +7,7 @@
  
 # Usage check
 if [ $# -ne 1 ]; then
- echo "*** Usage error: remove_launcher [stock | nexus ]"
+ echo "*** Usage error: remove_launcher [stock | adw ]"
  exit 1
 fi
  
@@ -15,11 +15,11 @@ fi
 if [ $1 = 'stock' ]; then
   apk=/system/app/Launcher2.apk
   pref=/data/data/com.android.launcher/
-elif [ $1 = 'nexus' ]; then
-  apk=/system/app/NexusLauncher.apk
-  pref=/data/data/com.android.nexuslauncher/
+elif [ $1 = 'adw' ]; then
+  apk=/system/app/ADWLauncher.apk
+  pref=/data/data/com.android.launcher/
 else
- echo "*** Usage error: remove_launcher [stock | nexus ]"
+ echo "*** Usage error: remove_launcher [stock | adw ]"
  exit 1
 fi  
  
