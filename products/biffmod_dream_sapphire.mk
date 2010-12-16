@@ -74,6 +74,3 @@ PRODUCT_COPY_FILES +=  \
 
 
 PRODUCT_PACKAGES += Gallery Launcher2 BiffMod
-
-PACKAGES.Gallery.OVERRIDES := Gallery3D
-
